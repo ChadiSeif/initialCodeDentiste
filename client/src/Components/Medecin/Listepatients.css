@@ -1,0 +1,21 @@
+.listepatients {
+  background-color: white;
+  min-height: 1000px;
+  width: 1000px;
+  margin-top: 40px;
+  margin-left: 350px;
+  margin-bottom: 50px;
+  border-radius: 8px;
+  padding: 50px;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+}
+
+.patients {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

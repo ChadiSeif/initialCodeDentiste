@@ -1,0 +1,14 @@
+.DisponibilityCard {
+  display: flex;
+  margin-bottom: 30px;
+  justify-content: space-between;
+  font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
+  border-bottom: solid 1px lightgrey;
+}
+
+.Days {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  transform: translate(0, 5px);
+}
