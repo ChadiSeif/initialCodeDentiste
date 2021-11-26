@@ -1,15 +1,15 @@
 import React from "react";
-import { loadCldr } from "@syncfusion/ej2-base";
-import {
-  Inject,
-  ScheduleComponent,
-  Day,
-  Week,
-  WorkWeek,
-  Month,
-  Agenda,
-  // EventSettingsModel,
-} from "@syncfusion/ej2-react-schedule";
+// import { loadCldr } from "@syncfusion/ej2-base";
+// import {
+//   Inject,
+//   ScheduleComponent,
+//   Day,
+//   Week,
+//   WorkWeek,
+//   Month,
+//   Agenda,
+//   // EventSettingsModel,
+// } from "@syncfusion/ej2-react-schedule";
 import "./Schedular.css";
 
 const Schedular = ({ RdvMedecin }) => {
@@ -20,9 +20,9 @@ const Schedular = ({ RdvMedecin }) => {
   //   require("cldr/main/fr/timeZoneNames.json")
   // );
 
-  const EventSettingsModel = {
-    dataSource: RdvMedecin,
-  };
+  // const EventSettingsModel = {
+  //   dataSource: RdvMedecin,
+  // };
 
   // const onPopupOpen = (args) => {
   //   args.element.innerHTML = "";
@@ -31,7 +31,7 @@ const Schedular = ({ RdvMedecin }) => {
 
   return (
     <div className="schedular">
-      <div
+      {/* <div
         className="scheduleComponent"
         style={{
           width: "90%",
@@ -50,7 +50,8 @@ const Schedular = ({ RdvMedecin }) => {
         >
           <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
         </ScheduleComponent>
-      </div>
+      </div> */}
+      <h4>hello !</h4>
     </div>
   );
 };
