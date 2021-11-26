@@ -13,12 +13,12 @@ import {
 import "./Schedular.css";
 
 const Schedular = ({ RdvMedecin }) => {
-  loadCldr(
-    // require("cldr/supplemental/numberingSystems.json"),
-    require("cldr/main/fr/ca-gregorian.json"),
-    require("cldr/main/fr/numbers.json"),
-    require("cldr/main/fr/timeZoneNames.json")
-  );
+  // loadCldr(
+  //   require("cldr/supplemental/numberingSystems.json"),
+  //   require("cldr/main/fr/ca-gregorian.json"),
+  //   require("cldr/main/fr/numbers.json"),
+  //   require("cldr/main/fr/timeZoneNames.json")
+  // );
 
   const EventSettingsModel = {
     dataSource: RdvMedecin,
