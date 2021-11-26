@@ -12,11 +12,6 @@ const ImageUploaded = ({ Rdv }) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Patient {Rdv.user.nom}
-          </Modal.Title>
-        </Modal.Header>
         <Modal.Body>
           <img
             src={`http://localhost:3000/${link}`}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Card, Modal, Button } from "react-bootstrap";
+import ImageUploaded from "../FileUpload/ImageUploaded";
 
 import "./ListepatientCard.css";
 
@@ -11,6 +12,7 @@ const ListepatientCard = ({ patient }) => {
     (rdv) => rdv.user._id === patient._id
   );
 
+  console.log(rendezvous);
   //**Modal Functions */
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -50,11 +52,16 @@ const ListepatientCard = ({ patient }) => {
             </Modal.Body>
             <Modal.Body>Numéro de téléphone : {patient.numero}</Modal.Body>
             <Modal.Body>Rendez-vous:</Modal.Body>
-            {rendezvous.map((rdv) => (
+            {rendezvous.map((Rdv) => (
               <Modal.Body>
                 <ul>
-                  A consulté le {rdv.date} pour {rdv.Subject}
+                  A consulté le {Rdv.date} pour {Rdv.Consulting}
                 </ul>
+                {Rdv.image ? (
+                  <h5 style={{ cursor: "pointer" }}>
+                    <ImageUploaded Rdv={Rdv} />
+                  </h5>
+                ) : null}
               </Modal.Body>
             ))}
             <Modal.Footer>

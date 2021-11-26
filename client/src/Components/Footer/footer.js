@@ -1,33 +1,35 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./footer.css";
 
 const footer = () => {
   return (
     <div className="footer">
-      <div>
-        <img src="/logo.png" alt="logo" style={{ width: "25px" }} />
-        <p> Copyright © 2021 .Chadi Tous droits réservés.</p>
+      <div className="Logo">
+        <img src="/logo.png" alt="logo" style={{ width: "50px" }} />
       </div>
       <div>
-        <ul style={{ listStyleType: "none" }}>
-          Legal
-          <li>Confidentialité et Sécurité</li>
-          <li>Conditions générales d'utilisation</li>
-          <li>politique de protection des données personnelles </li>
+        <ul className="footerRdv" style={{ listStyleType: "none" }}>
+          <Link to={"/About-Us"}>
+            <a style={{ color: "inherit" }} href="/About-Us">
+              Qui somme nous ?
+            </a>
+          </Link>
+          <li>Conditions Générales d'Utilisation</li>
+          <li>Politique de Confidentialité</li>
         </ul>
       </div>
-      <ul style={{ listStyleType: "none" }}>
-        Dentiste.tn
-        {/* <Link to={"/About-Us"}> */}
-        <li>
-          <a style={{ color: "inherit" }} href="/About-Us">
-            Qui somme nous ?
-          </a>
-        </li>
-        {/* </Link> */}
-        <li>Nous contacter</li>
-      </ul>
+
+      <div>
+        <ul className="contact">
+          <li>Nous contacter : </li>
+          <li>+21624414870 </li>
+          <li>tndentiste@gmail.com </li>
+        </ul>
+      </div>
+      <div className="copyright">
+        <p> Copyright © 2021 Dentiste.tn Tous droits réservés.</p>
+      </div>
     </div>
   );
 };

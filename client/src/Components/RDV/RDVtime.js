@@ -12,7 +12,7 @@ const RDVtime = ({
   setStartTime,
   HoursInDay,
 }) => {
-  console.log(Day);
+  // console.log(Day);
 
   //** setting time interval */
   const interval = disponibilityReducer.interval;
@@ -24,10 +24,10 @@ const RDVtime = ({
     return parseInt(splitValue[0]) * 60 * 60 + parseInt(splitValue[1]) * 60;
   };
   //** Current Hour */
-  var date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const TimeNow = `${hours}:${minutes}`;
+  // var date = new Date();
+  // const hours = date.getHours();
+  // const minutes = date.getMinutes();
+  // const TimeNow = `${hours}:${minutes}`;
 
   //**Creating array of Time */
   const locale = "fr";

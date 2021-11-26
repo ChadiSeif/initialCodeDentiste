@@ -12,6 +12,7 @@ exports.Add = async (req, res) => {
       Subject,
       user,
       medecin,
+      Consulting,
     } = req.body;
 
     const rendezvous = new Rdv({
@@ -23,6 +24,7 @@ exports.Add = async (req, res) => {
       Subject,
       user,
       medecin,
+      Consulting,
     });
     if (req.file) {
       rendezvous.image = req.file.path;

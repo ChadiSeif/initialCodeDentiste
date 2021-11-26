@@ -1,7 +1,7 @@
 {
   "name": "project",
   "engines": {
-    "node": "v16.3.0"
+    "node": "v16.x.x"
   },
   "version": "1.0.0",
   "description": "Application pour simplifier la prise de rendez-vous et la gestion des patients chez les médecins ",

@@ -12,7 +12,6 @@ const Listepatients = () => {
   const patientUniqueByKey = [
     ...new Map(patients.map((patient) => [patient[key], patient])).values(),
   ];
-  console.log(patientUniqueByKey);
 
   const [name, setName] = useState("");
   const [DOB, setDOB] = useState("");

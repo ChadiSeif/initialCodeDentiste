@@ -22,6 +22,7 @@ const RDV = ({ location, history }) => {
   const medecinid = location.pathname.substring(5);
   const medecinRDV = useSelector((state) => state.userReducer.medecinRDV);
   const userId = useSelector((state) => state.userReducer.user._id);
+  const userReducer = useSelector((state) => state.userReducer.user);
   const disponibilityReducer = useSelector(
     (state) => state.disponibilityReducer.disponibility
   );
@@ -63,9 +64,10 @@ const RDV = ({ location, history }) => {
     hourfinishing: "",
     StartTime: "",
     EndTime: "",
-    Subject: "",
+    Subject: userReducer.nom + " " + userReducer.prenom,
     user: userId,
     medecin: medecinid,
+    Consulting: "",
     image: "",
   });
   console.log(Rdv);
@@ -82,6 +84,7 @@ const RDV = ({ location, history }) => {
   formData.append("StartTime", Rdv.StartTime);
   formData.append("EndTime", Rdv.EndTime);
   formData.append("Subject", Rdv.Subject);
+  formData.append("Consulting", Rdv.Consulting);
   formData.append("user", Rdv.user);
   formData.append("medecin", Rdv.medecin);
   formData.append("image", Rdv.image);
@@ -165,7 +168,7 @@ const RDV = ({ location, history }) => {
                   onChange={(e) => {
                     setRdv({
                       ...Rdv,
-                      Subject: e.target.value,
+                      Consulting: e.target.value,
                       date: value.toLocaleDateString("fr-FR"),
                       hour: `${StartingTime}`,
                       StartTime: `${datepicked} ${StartingTime}`,

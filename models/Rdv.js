@@ -22,6 +22,10 @@ const RDVschema = new Schema({
     type: String,
     required: true,
   },
+  Consulting: {
+    type: String,
+  },
+
   // confirmed: {
   //   type: Boolean,
   //   default: false,

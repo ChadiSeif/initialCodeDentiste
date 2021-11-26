@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 exports.validregister = () => [
   body("prenom", "Merci d'ajouter votre nom").notEmpty(),
   body("nom", "Merci d'ajouter votre prénom").notEmpty(),
-  body("numero", "Merci d'ajouter votre numero").notEmpty(),
+  body("numero", "Merci d'ajouter votre numero").isLength({ min: 8 }),
   body("dateDeNaissance", "Merci d'ajouter votre date de naissance").notEmpty(),
   body("email", "Merci de corriger votre email").isEmail(),
   body("motdepass", "Merci d'ajouter votre mot de passe").isLength({ min: 3 }),

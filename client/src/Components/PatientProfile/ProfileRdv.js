@@ -35,7 +35,7 @@ const ProfileRdv = () => {
               </td>
               <td>{Rdv.medecin.address}</td>
               <td>{Rdv.medecin.phone}</td>
-              <td>{Rdv.Subject}</td>
+              <td>{Rdv.Consulting}</td>
               <Button
                 style={{ margin: "5px" }}
                 variant="danger"
