@@ -45,15 +45,17 @@ const Accueil = () => {
                   </td>
                   <td>
                     <span>
-                      <Button
-                        variant="success"
-                        size="sm"
-                        onClick={() =>
-                          dispatch(UpdateRdv(rdv._id, { confirmed: true }))
-                        }
-                      >
-                        Confirmer
-                      </Button>
+                      {!rdv.confirmed ? (
+                        <Button
+                          variant="success"
+                          size="sm"
+                          onClick={() =>
+                            dispatch(UpdateRdv(rdv._id, { confirmed: true }))
+                          }
+                        >
+                          Confirmer
+                        </Button>
+                      ) : null}
                       {/* <Button variant="warning" size="sm">
                         Reporter
                       </Button> */}

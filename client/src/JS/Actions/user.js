@@ -21,7 +21,7 @@ export const RegisterUser = (newUser, navigate) => async (dispatch) => {
     navigate("/");
     return dispatch({ type: REGISTER_SUCCESS, payload: result.data }); //msg.newuser.token
   } catch (error) {
-    dispatch({ type: USER_FAIL, payload: error.response });
+    // dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 
@@ -33,7 +33,7 @@ export const LoginUser = (User, navigate) => async (dispatch) => {
     navigate(`/Profil/Rdv`);
     return dispatch({ type: LOGIN_SUCCESS, payload: result.data });
   } catch (error) {
-    return dispatch({ type: USER_FAIL, payload: error.response });
+    // return dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 

@@ -3,9 +3,14 @@ import { Card, Nav, Button } from "react-bootstrap";
 import { Modal, Form, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { UpdateUser } from "../../JS/Actions/user";
+import { useOutletContext } from "react-router-dom";
 import "./ProfilInformations.css";
 
-const ProfilInformations = ({ user, setuser, userid }) => {
+const ProfilInformations = () => {
+  const [user, setuser] = useOutletContext();
+
+  console.log(user);
+
   const HandleChange = (e) => {
     setuser({ ...user, [e.target.name]: e.target.value });
   };
@@ -34,7 +39,7 @@ const ProfilInformations = ({ user, setuser, userid }) => {
           </div>
           <div>
             <h5>
-              lastName : <span> {user.lastName}</span>
+              Prénom : <span> {user.lastName}</span>
             </h5>
           </div>
           <div>
@@ -130,7 +135,7 @@ const ProfilInformations = ({ user, setuser, userid }) => {
                   variant="primary"
                   style={{ margin: "auto", marginTop: "20px" }}
                   onClick={() => {
-                    dispatch(UpdateUser(userid, user));
+                    dispatch(UpdateUser(user._id, user));
                     handleClose();
                   }}
                 >

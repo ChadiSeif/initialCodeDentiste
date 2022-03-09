@@ -9,8 +9,6 @@ import Profil from "./Pages/Patient/profil";
 import Login from "./Pages/Login/login";
 import Register from "./Pages/RegisterPatient/register";
 import Error from "./Pages/Errors/error";
-import Navbar from "./Components/Navbar/navbar";
-import Footer from "./Components/Footer/footer";
 import PrivateRoute from "./Routes/PrivateRoute";
 import RDV from "./Pages/RDV/RDV";
 import Medecin from "./Pages/Medecin/Medecin";
@@ -18,11 +16,17 @@ import LoginMedecin from "./Pages/Medecin/LoginMedecin";
 import ListMedecin from "./Pages/ListMedecin/ListMedecin";
 import AboutUs from "./Pages/AboutUs/aboutUs";
 import RdvCheck from "./Pages/RdvCheck/RdvCheck";
+import Navbar from "./Components/Navbar/navbar";
+import Footer from "./Components/Footer/footer";
 import Accueil from "./Components/Medecin/accueil/Accueil";
 import MedecinCardProfil from "./Components/Medecin/parametreProfil/MedecinCardProfil";
 import Disponibility from "./Components/Medecin/disponibility/Disponibility";
 import Listepatients from "./Components/Medecin/archivePatients/Listepatients";
 import Schedular from "./Components/Schedular/Schedular";
+import ProfileRdv from "./Components/PatientProfile/ProfileRdv";
+import Demandes from "./Components/PatientProfile/Demandes";
+import ProfilInformations from "./Components/PatientProfile/ProfilInformations";
+import DossierMedical from "./Components/PatientProfile/DossierMedical";
 
 function App() {
   const [Doctorlogged, setDoctorlogged] = useState(false);
@@ -38,13 +42,19 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Index />} />
         <Route
-          path="/Profil/:_id"
+          path="/Profil/"
           element={
             <PrivateRoute>
               <Profil />
             </PrivateRoute>
           }
-        />
+        >
+          <Route index element={<ProfileRdv />} />
+          <Route path="Rdv" element={<ProfileRdv />} />
+          <Route path="informations" element={<ProfilInformations />} />
+          <Route path="DossierMedical" component={DossierMedical} />
+          {/* <Route element="Demande" element={<Demandes />} /> */}
+        </Route>
         <Route path="/Login" element={<Login />} />
         <Route path="/RDV" element={<RDV />} />
         <Route path="/Register" element={<Register />} />
