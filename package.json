@@ -61,8 +61,7 @@
     "nodemon": "^2.0.12",
     "oclif": "^1.18.1",
     "phoenix": "^1.6.2",
-    "react-bootstrap-time-picker": "^2.0.1",
-    "react-calendar": "^3.5.0",
+    "react-calendar": "^3.7.0",
     "sass": "^1.39.0",
     "scss": "^0.2.4",
     "time-number": "^1.1.0"

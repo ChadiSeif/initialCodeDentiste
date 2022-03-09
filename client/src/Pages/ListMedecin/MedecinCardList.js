@@ -1,5 +1,5 @@
 import React from "react";
-import SimpleMap from "../GoogleMaps/GoogleMapReactListmedecins";
+import SimpleMap from "../../Components/GoogleMaps/GoogleMapReactListmedecins";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { PrendreRdv } from "../../JS/Actions/user";
@@ -36,7 +36,7 @@ const MedecinCardList = ({ medecin }) => {
         <p>Addresse : {medecin.address}</p>
         <p>Ville : {medecin.city}</p>
         <p>Contact : {medecin.phone}</p>
-        <Link to={`/RDV/${medecin._id}`}>
+        <Link to={`/RDV/`}>
           <Button
             variant="primary"
             onClick={() => dispatch(PrendreRdv(medecin._id))}

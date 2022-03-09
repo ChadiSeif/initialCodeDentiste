@@ -39,22 +39,22 @@ export const currentMedecin = () => async (dispatch) => {
 export const GET_onemedecin = (medecinid) => async (dispatch) => {
   try {
     const result = await axios.get(`/api/medecin/onedoctor/${medecinid}`);
-    dispatch({ type: GET_ONEDOCTOR_SUCCESS, payload: result.data }); //msg,doctorfound
+    return dispatch({ type: GET_ONEDOCTOR_SUCCESS, payload: result.data }); //msg,doctorfound
   } catch (error) {
-    dispatch({ type: GET_ONEDOCTOR_FAIL, payload: error.response.data });
+    return dispatch({ type: GET_ONEDOCTOR_FAIL, payload: error.response.data });
   }
 };
 
-export const LoginMed = (Medecin, history) => async (dispatch) => {
+export const LoginMed = (Medecin, navigate) => async (dispatch) => {
   dispatch({ type: LOGIN_MEDECIN_LOAD });
   try {
     const result = await axios.post("/api/medecin/LoginMedecin", Medecin);
-    dispatch({ type: LOGIN_MEDECIN_SUCCESS, payload: result.data });
     const medecin_id = result.data.doctorfound._id;
     localStorage.setItem("token", result.data.token);
-    history.push(`/Dr/${medecin_id}/Rendez-vous`);
+    navigate(`/Dr/${medecin_id}/Accueil`);
+    return dispatch({ type: LOGIN_MEDECIN_SUCCESS, payload: result.data });
   } catch (error) {
-    dispatch({ type: LOGIN_MEDECIN_FAIL, payload: error.response.data });
+    // dispatch({ type: LOGIN_MEDECIN_FAIL, payload: error.response.data });
   }
 };
 

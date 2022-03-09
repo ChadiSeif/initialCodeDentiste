@@ -48,7 +48,10 @@ const MedecinCard = ({ medecin, history }) => {
           <Link to={`/RDV/${medecin._id}`}>
             <Button
               variant="primary"
-              onClick={() => dispatch(PrendreRdv(medecin._id))}
+              onClick={() => {
+                dispatch(PrendreRdv(medecin._id));
+                localStorage.setItem("medecinID", medecin._id);
+              }}
             >
               Prendre Rendez-vous
             </Button>

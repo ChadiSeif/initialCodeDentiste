@@ -39,24 +39,23 @@ exports.registermedecin = async (req, res) => {
       password,
     });
 
-    console.log(newdoctor);
-
     ///hash password
 
     const salt = 10;
     const hashedPassword = await bcrypt.hash(password, salt);
     newdoctor.password = hashedPassword;
+    await newdoctor.save();
 
     // //Generate Token
 
-    await newdoctor.save();
-
     const token = jwt.sign({ id: newdoctor._id }, process.env.SECRET_KEY);
-    res
+    return res
       .status(200)
       .send({ msg: "Docteur vous etes bien enregistré", newdoctor, token });
   } catch (error) {
-    res.status(401).send({ errors: [{ msg: "Docteur non enregistré " }] });
+    return res
+      .status(401)
+      .send({ errors: [{ msg: "Docteur non enregistré " }] });
   }
 };
 
@@ -94,18 +93,10 @@ exports.currentMedecin = (req, res) => {
 
 exports.getlist = async (req, res) => {
   try {
-    // const page = req.query.page;
-    // const limit = req.query.limit;
-    // const startIndex = (page - 1) * limit;
-    // const endIndex = page * limit;
     const medecins = await Medecin.find();
-
-    // const results = {};
-    // const medecins = medecinlist.slice(startIndex, endIndex);
-
-    res.status(200).send({ msg: "liste des médecins", medecins });
+    return res.status(200).send({ msg: "liste des médecins", medecins });
   } catch (error) {
-    res
+    return res
       .status(401)
       .send({ errors: [{ msg: "liste des médecins n'est pas disponible" }] });
   }
@@ -114,13 +105,14 @@ exports.getlist = async (req, res) => {
 exports.getOneDoctor = async (req, res) => {
   try {
     const doctortofind = req.params.id;
-    // console.log(doctortofind)
-
     const doctorfound = await Medecin.findOne({ _id: doctortofind });
-
-    res.status(200).send({ msg: "here is the doctor you want", doctorfound });
+    return res
+      .status(200)
+      .send({ msg: "here is the doctor you want", doctorfound });
   } catch (error) {
-    res.status(401).send({ errors: [{ msg: "Ce docteur n'existe pas" }] });
+    return res
+      .status(401)
+      .send({ errors: [{ msg: "Ce docteur n'existe pas" }] });
   }
 };
 
@@ -132,9 +124,9 @@ exports.updateDoctor = doctorid = async (req, res) => {
       { _id: doctorid },
       { $set: { ...doctorupdated } }
     );
-    res.status(200).send({ msg: "Vos informations sont bien modifiés" });
+    return res.status(200).send({ msg: "Vos informations sont bien modifiés" });
   } catch (error) {
-    res.status(401).send({ errors: [{ msg: "update failed..." }] });
+    return res.status(401).send({ errors: [{ msg: "update failed..." }] });
   }
 };
 
@@ -142,8 +134,8 @@ exports.deleteDoctor = doctorid = async (req, res) => {
   try {
     const doctorid = req.params.id;
     await Medecin.deleteOne({ _id: doctorid });
-    res.status(200).send({ msg: "Compte supprimé !" });
+    return res.status(200).send({ msg: "Compte supprimé !" });
   } catch (error) {
-    res.status(401).send({ msg: "Compte ne peut pas etre supprimé " });
+    return res.status(401).send({ msg: "Compte ne peut pas etre supprimé " });
   }
 };

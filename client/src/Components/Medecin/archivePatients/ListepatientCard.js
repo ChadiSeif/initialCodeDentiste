@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Card, Modal, Button } from "react-bootstrap";
-import ImageUploaded from "../FileUpload/ImageUploaded";
+import ImageUploaded from "../../FileUpload/ImageUploaded";
 
 import "./ListepatientCard.css";
 
@@ -34,7 +34,7 @@ const ListepatientCard = ({ patient }) => {
         />
         <Card.Body>
           <p>
-            {patient.nom} {patient.prenom}
+            {patient.lastName} {patient.firstName}
           </p>
 
           <Button variant="outline-dark" onClick={handleShow} size="sm">
@@ -44,13 +44,11 @@ const ListepatientCard = ({ patient }) => {
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>
-                {patient.nom} {patient.prenom}
+                {patient.lastName} {patient.firstName}
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-              Date de naissance : {patient.dateDeNaissance}
-            </Modal.Body>
-            <Modal.Body>Numéro de téléphone : {patient.numero}</Modal.Body>
+            <Modal.Body>Date de naissance : {patient.dateOfBirth}</Modal.Body>
+            <Modal.Body>Numéro de téléphone : {patient.phone}</Modal.Body>
             <Modal.Body>Rendez-vous:</Modal.Body>
             {rendezvous.map((Rdv) => (
               <Modal.Body>

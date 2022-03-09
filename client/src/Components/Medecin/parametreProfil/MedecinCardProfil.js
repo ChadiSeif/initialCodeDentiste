@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { UpdateMedecin } from "../../JS/Actions/medecin";
+import { UpdateMedecin } from "../../../JS/Actions/medecin";
 
 import "./MedecinCardProfil.css";
 
-const MedecinCardProfil = ({ medecinRed, setActiveRdv, activeRdv }) => {
+const MedecinCardProfil = ({ setActiveRdv, activeRdv }) => {
+  const medecinInfo = useSelector((state) => state.medecinReducer.medecin);
   const [medecin, setmedecin] = useState({
     firstname: "",
     lastname: "",
@@ -18,8 +19,8 @@ const MedecinCardProfil = ({ medecinRed, setActiveRdv, activeRdv }) => {
   });
 
   useEffect(() => {
-    setmedecin(medecinRed);
-  }, [medecinRed]);
+    setmedecin(medecinInfo);
+  }, [medecinInfo]);
 
   const dispatch = useDispatch();
   const HandleChange = (e) => {
@@ -107,7 +108,7 @@ const MedecinCardProfil = ({ medecinRed, setActiveRdv, activeRdv }) => {
           <Button
             style={{ margin: "50px" }}
             variant="outline-dark"
-            onClick={() => dispatch(UpdateMedecin(medecinRed._id, medecin))}
+            onClick={() => dispatch(UpdateMedecin(medecinInfo._id, medecin))}
           >
             Modifier Profil
           </Button>

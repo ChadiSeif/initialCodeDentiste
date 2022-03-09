@@ -26,10 +26,10 @@ const RDVschema = new Schema({
     type: String,
   },
 
-  // confirmed: {
-  //   type: Boolean,
-  //   default: false,
-  // },
+  confirmed: {
+    type: Boolean,
+    default: false,
+  },
   // RdvUpdate: {
   //   type: Boolean,
   //   default: false,

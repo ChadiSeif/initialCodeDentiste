@@ -14,7 +14,7 @@ const ProfileRdv = () => {
       className="ProfileRdv"
       style={{ margin: "30px 0 ", backgroundColor: "white" }}
     >
-      <Table striped bordered hover size="sm">
+      <Table bordered size="sm">
         <thead>
           <tr>
             <th>Docteur</th>
@@ -22,6 +22,8 @@ const ProfileRdv = () => {
             <th>Adresse</th>
             <th>Numéro de téléphone</th>
             <th>Motif de consultation</th>
+            <th>Statut</th>
+            <th>Modification</th>
           </tr>
         </thead>
         <tbody>
@@ -36,13 +38,26 @@ const ProfileRdv = () => {
               <td>{Rdv.medecin.address}</td>
               <td>{Rdv.medecin.phone}</td>
               <td>{Rdv.Consulting}</td>
-              <Button
-                style={{ margin: "5px" }}
-                variant="danger"
-                onClick={() => dispatch(deleteRdv(Rdv._id))}
-              >
-                Annuler le Rdv
-              </Button>
+              <td>
+                {Rdv.confirmed ? (
+                  <Button disabled size="sm" variant="success">
+                    confirmé
+                  </Button>
+                ) : (
+                  <Button disabled size="sm" variant="danger">
+                    en attente
+                  </Button>
+                )}
+              </td>
+              <td>
+                <Button
+                  size="sm"
+                  variant="outline-danger"
+                  onClick={() => dispatch(deleteRdv(Rdv._id))}
+                >
+                  Annuler le Rdv
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>

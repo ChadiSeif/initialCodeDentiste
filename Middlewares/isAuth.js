@@ -6,7 +6,7 @@ const isAuth = async (req, res, next) => {
     const tokentoverify = req.headers["authorization"];
     if (!tokentoverify) {
       return res
-        .status(401)
+        .status(403)
         .send({ errors: [{ msg: " vous n'etes pas authentifié !" }] });
     }
 
@@ -16,14 +16,14 @@ const isAuth = async (req, res, next) => {
     if (!userToFind) {
       return res
         .status(401)
-        .send({ errors: [{ msg: " vous n'etes pas authentifié !!" }] });
+        .send({ errors: [{ msg: "vous n'etes pas authentifié !!" }] });
     }
     req.user = userToFind;
     next();
   } catch (error) {
     res
       .status(401)
-      .send({ errors: [{ msg: " vous n'etes pas authentifié !!!" }] });
+      .send({ errors: [{ msg: "vous n'etes pas authentifié !!!" }] });
   }
 };
 module.exports = isAuth;

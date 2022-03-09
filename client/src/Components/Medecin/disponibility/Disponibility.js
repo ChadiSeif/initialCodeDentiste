@@ -5,12 +5,13 @@ import "./Disponibility.css";
 import {
   getDisponibility,
   updateDisponibility,
-} from "../../JS/Actions/disponibility";
+} from "../../../JS/Actions/disponibility";
 import DisponibilityCard from "./DisponibilityCard";
+import { useParams } from "react-router-dom";
 
-const Disponibility = ({ medecinid }) => {
+const Disponibility = () => {
   const dispatch = useDispatch();
-
+  const medecinid = useParams()._id;
   const disponibilityReducer = useSelector(
     (state) => state.disponibilityReducer.disponibility
   );

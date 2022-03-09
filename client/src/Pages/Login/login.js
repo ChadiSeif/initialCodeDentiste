@@ -1,23 +1,29 @@
 import React, { useState } from "react";
-import { useDispatch , useSelector} from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { LoginUser } from "../../JS/Actions/user";
 import "./login.css";
 
 const Login = ({ history }) => {
+  const navigate = useNavigate();
+
   const [User, setUser] = useState({
     email: "",
-    motdepass: "",
+    password: "",
   });
 
-
-const error = useSelector(state => state.userReducer.error)
-
+  const error = useSelector((state) => state.userReducer.error);
+  const dispatch = useDispatch();
 
   const HandleChange = (e) => {
     setUser({ ...User, [e.target.name]: e.target.value });
   };
-  const dispatch = useDispatch();
+
+  const onEnter = (e) => {
+    if (e.keyCode === 13) {
+      dispatch(LoginUser(User, history));
+    }
+  };
 
   return (
     <div>
@@ -40,10 +46,11 @@ const error = useSelector(state => state.userReducer.error)
                   <p className="login-card-description">
                     Connectez-vous à votre compte:
                   </p>
-                  {error?
-                  <div style={{color:"red" , fontSize:"12px"}}>
-                    <p> {error.map(error=>error.msg)}</p>
-                  </div>:null}
+                  {error ? (
+                    <div style={{ color: "red", fontSize: "12px" }}>
+                      <p> {error.map((error) => error.msg)}</p>
+                    </div>
+                  ) : null}
                   <form action="#!">
                     <div className="form-group">
                       <label htmlFor="email" className="sr-only">
@@ -65,32 +72,39 @@ const error = useSelector(state => state.userReducer.error)
                       </label>
                       <input
                         type="password"
-                        name="motdepass"
+                        name="password"
                         id="password"
                         className="form-control"
-                        value={User.motdepass}
+                        value={User.password}
                         onChange={HandleChange}
                         placeholder="***********"
+                        onKeyDown={(e) => onEnter(e)}
                       />
                     </div>
-                    <input
+                    <button
                       name="login"
                       id="login"
                       className="btn btn-block login-btn mb-4"
                       type="button"
-                      defaultValue="Connexion"
-                      onClick={() => dispatch(LoginUser(User, history))}
-                    />
+                      onClick={() => dispatch(LoginUser(User, navigate))}
+                    >
+                      Connexion
+                    </button>
                   </form>
                   <a href="#!" className="forgot-password-link">
                     Mot de passe oublié ?
                   </a>
-                  {/* <p className="login-card-footer-text">
-                    Don't have an account?{" "}
-                    <a href="#!" className="text-reset">
-                      Register here
+
+                  <p className="login-card-footer-text">
+                    Vous n'avez pas encore de compte ?{" "}
+                    <a
+                      href="/CheckRdv"
+                      className="text-reset"
+                      style={{ marginTop: "10px" }}
+                    >
+                      Créer un compte
                     </a>
-                  </p> */}
+                  </p>
                   <hr />
                   <nav className="login-card-footer-nav">
                     <a href="#!">Terms of use.</a>

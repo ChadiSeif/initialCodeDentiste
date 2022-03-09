@@ -21,6 +21,9 @@ const MedecinSideBar = ({ medecinid, RdvMedecin }) => {
           <nav className="main-nav" role="navigation">
             <ul className="unstyled list-hover-slide">
               <li>
+                <a href={`/Dr/${medecinid}/Accueil`}>Accueil</a>
+              </li>
+              <li>
                 <a href={`/Dr/${medecinid}/Rendez-vous`}>Rendez-vous</a>
               </li>
               <li>

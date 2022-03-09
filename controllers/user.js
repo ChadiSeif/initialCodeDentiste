@@ -4,8 +4,15 @@ var jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   try {
-    const { nom, prenom, numero, dateDeNaissance, raison, email, motdepass } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      phone,
+      dateOfBirth,
+      consulting,
+      email,
+      password,
+    } = req.body;
 
     ///check email
 
@@ -20,30 +27,30 @@ exports.register = async (req, res) => {
       });
     }
     const newuser = new User({
-      nom,
-      prenom,
-      numero,
-      dateDeNaissance,
-      raison,
+      firstName,
+      lastName,
+      phone,
+      dateOfBirth,
+      consulting,
       email,
-      motdepass,
+      password,
     });
 
     // hashing the password
     const salt = 10;
-    const hashedmotdepass = await bcrypt.hash(motdepass, salt);
-    newuser.motdepass = hashedmotdepass;
+    const hashedpassword = await bcrypt.hash(password, salt);
+    newuser.password = hashedpassword;
 
     //Generate Token
-
     await newuser.save();
-
-    const token = jwt.sign({ id: newuser._id }, process.env.SECRET_KEY);
+    const token = jwt.sign({ id: newuser._id }, process.env.SECRET_KEY, {
+      expiresIn: "24h",
+    });
     res
       .status(200)
       .send({ msg: "utilisateur est bien enregistré", newuser, token });
   } catch (error) {
-    res.status(400).send({
+    return res.status(400).send({
       errors: [{ msg: " Prise de rendez vous non effectuée !" }],
     });
   }
@@ -51,28 +58,34 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, motdepass } = req.body;
+    const { email, password } = req.body;
 
     ///test email
     const userToFind = await User.findOne({ email });
     if (!userToFind) {
-      res.status(400).send({ errors: [{ msg: "Informations non valides" }] });
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "Informations non valides" }] });
     }
 
-    console.log(userToFind);
+    //Create token
+    const token = jwt.sign({ id: userToFind._id }, process.env.SECRET_KEY, {
+      expiresIn: "24h",
+    });
 
-    const token = jwt.sign({ id: userToFind._id }, process.env.SECRET_KEY);
-
-    // verif motdepass
-    const isMatch = await bcrypt.compare(motdepass, userToFind.motdepass);
-    console.log(isMatch);
+    // verif password
+    const isMatch = await bcrypt.compare(password, userToFind.password);
     if (isMatch) {
-      res.status(200).send({ msg: "Succes", userToFind, token });
+      return res.status(200).send({ msg: "Succes", userToFind, token });
     } else {
-      res.status(400).send({ errors: [{ msg: "Informations non valides" }] });
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "Informations non valides" }] });
     }
   } catch (error) {
-    res.status(400).send({ errors: [{ msg: "erreur d'authentification" }] });
+    return res
+      .status(400)
+      .send({ errors: [{ msg: "erreur d'authentification" }] });
   }
 };
 
@@ -84,13 +97,18 @@ exports.updateUser = userid = async (req, res) => {
   try {
     const userid = req.params.id;
     const userupdated = req.body;
+    const salt = 10;
+    const hashedpassword = bcrypt.hash(userupdated.password, salt);
+    userupdated.password = hashedpassword;
     const result = await User.updateOne(
       { _id: userid },
       { $set: { ...userupdated } }
     );
-    res.status(200).send({ msg: "Vos informations sont bien modifiés" });
+    return res
+      .status(200)
+      .send({ msg: "Vos informations sont bien modifiées", result });
   } catch (error) {
-    res.status(401).send({ errors: [{ msg: "update failed..." }] });
+    return res.status(401).send({ errors: [{ msg: "update failed..." }] });
   }
 };
 
@@ -98,8 +116,8 @@ exports.deleteUser = userid = async (req, res) => {
   try {
     const userid = req.params.id;
     await User.deleteOne({ _id: userid });
-    res.status(200).send({ msg: "Compte supprimé !" });
+    return res.status(200).send({ msg: "Compte supprimé !" });
   } catch (error) {
-    res.status(401).send({ msg: "Compte ne peut pas etre supprimé " });
+    return res.status(401).send({ msg: "Compte ne peut pas etre supprimé " });
   }
 };

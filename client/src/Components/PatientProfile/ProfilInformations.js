@@ -29,22 +29,22 @@ const ProfilInformations = ({ user, setuser, userid }) => {
           </div>
           <div>
             <h5>
-              Nom : <span> {user.nom} </span>
+              Nom : <span> {user.firstName} </span>
             </h5>
           </div>
           <div>
             <h5>
-              Prenom : <span> {user.email}</span>
+              lastName : <span> {user.lastName}</span>
             </h5>
           </div>
           <div>
             <h5>
-              Numéro de téléphone : <span> {user.numero}</span>
+              Numéro de téléphone : <span> {user.phone}</span>
             </h5>
           </div>
           <div>
             <h5>
-              Date de naissance : <span>{user.dateDeNaissance}</span>
+              Date de naissance : <span>{user.dateOfBirth}</span>
             </h5>
           </div>
           <div>
@@ -53,7 +53,7 @@ const ProfilInformations = ({ user, setuser, userid }) => {
             </Button>
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title> Modifier mon profil</Modal.Title>
               </Modal.Header>
 
               {/* ********** Form Modal ************** */}
@@ -63,8 +63,8 @@ const ProfilInformations = ({ user, setuser, userid }) => {
                     <Form.Label>Nom</Form.Label>
                     <Form.Control
                       type="text"
-                      name="nom"
-                      value={user.nom}
+                      name="firstName"
+                      value={user.firstName}
                       onChange={HandleChange}
                     />
                   </Form.Group>
@@ -73,8 +73,8 @@ const ProfilInformations = ({ user, setuser, userid }) => {
                     <Form.Label>Prénom</Form.Label>
                     <Form.Control
                       type="text"
-                      name="prenom"
-                      value={user.prenom}
+                      name="lastName"
+                      value={user.lastName}
                       onChange={HandleChange}
                     />
                   </Form.Group>
@@ -84,8 +84,8 @@ const ProfilInformations = ({ user, setuser, userid }) => {
                   <Form.Group as={Col} controlId="formGridCity">
                     <Form.Label>dateDeNaissance</Form.Label>
                     <Form.Control
-                      name="dateDeNaissance"
-                      value={user.dateDeNaissance}
+                      name="dateOfBirth"
+                      value={user.dateOfBirth}
                       onChange={HandleChange}
                     />
                   </Form.Group>
@@ -93,8 +93,8 @@ const ProfilInformations = ({ user, setuser, userid }) => {
                   <Form.Group as={Col} controlId="formGridZip">
                     <Form.Label>Numéro :</Form.Label>
                     <Form.Control
-                      name="numero"
-                      value={user.numero}
+                      name="phone"
+                      value={user.phone}
                       onChange={HandleChange}
                     />
                   </Form.Group>
@@ -116,8 +116,10 @@ const ProfilInformations = ({ user, setuser, userid }) => {
                     <Form.Control
                       type="password"
                       name="password"
-                      value={user.motdepass}
-                      disabled
+                      placeholder="Nouveau mot de passe"
+                      onChange={HandleChange}
+                      // value={user.password}
+                      // disabled
                     />
                   </Form.Group>
                 </Row>

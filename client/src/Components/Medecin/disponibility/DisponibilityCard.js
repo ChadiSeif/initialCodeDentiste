@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Toggle from "react-toggle";
 import { useDispatch } from "react-redux";
-import { updateDisponibilityDay } from "../../JS/Actions/disponibility";
+import { updateDisponibilityDay } from "../../../JS/Actions/disponibility";
 import { Button, Form, Modal, Row } from "react-bootstrap";
 import { FiEdit } from "react-icons/fi";
 import TimePicker from "react-bootstrap-time-picker";

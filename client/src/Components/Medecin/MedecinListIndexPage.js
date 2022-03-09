@@ -5,17 +5,18 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MedecinCard from "./MedecinCard";
 
-import "./Medecin.css";
+import "./MedecinListIndexPage.css";
 
-const Medecin = ({ name, city }) => {
+const MedecinListIndexPage = ({ name, city }) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(GET_medecin());
     // eslint-disable-next-line
   }, []);
 
-  const listmedecin = useSelector((state) => state.medecinReducer.listmedecin);
+  const listDesMedecins = useSelector(
+    (state) => state.medecinReducer.listmedecin
+  );
   const load = useSelector((state) => state.medecinReducer.load);
 
   return load ? (
@@ -40,7 +41,7 @@ const Medecin = ({ name, city }) => {
     </div>
   ) : (
     <div>
-      <Link to="/Medecins">
+      <Link to="/liste-des-medecins">
         <Button variant="outline-dark">Afficher plus</Button>
       </Link>
       <div className="medecin">
@@ -48,7 +49,7 @@ const Medecin = ({ name, city }) => {
            <MedecinCard medecin={medecin} key={i}  />)} */}
 
         {city && name
-          ? listmedecin
+          ? listDesMedecins
               .filter(
                 (medecin, i) =>
                   medecin.city.toLowerCase().includes(city.toLowerCase()) &&
@@ -57,13 +58,13 @@ const Medecin = ({ name, city }) => {
               )
               .map((medecin, i) => <MedecinCard medecin={medecin} key={i} />)
           : city
-          ? listmedecin
+          ? listDesMedecins
               .filter((medecin, i) => {
                 return medecin.city.toLowerCase().includes(city.toLowerCase());
               })
               .map((medecin, i) => <MedecinCard medecin={medecin} key={i} />)
           : name
-          ? listmedecin
+          ? listDesMedecins
               .filter((medecin, i) => {
                 return (
                   medecin.lastname.toLowerCase().includes(name.toLowerCase()) ||
@@ -71,7 +72,7 @@ const Medecin = ({ name, city }) => {
                 );
               })
               .map((medecin, i) => <MedecinCard medecin={medecin} key={i} />)
-          : listmedecin.map((medecin, i) => (
+          : listDesMedecins.map((medecin, i) => (
               <MedecinCard medecin={medecin} key={i} />
             ))}
       </div>
@@ -79,4 +80,4 @@ const Medecin = ({ name, city }) => {
   );
 };
 
-export default Medecin;
+export default MedecinListIndexPage;

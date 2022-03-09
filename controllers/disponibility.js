@@ -21,7 +21,6 @@ exports.MedecinDispo = async (req, res) => {
     const disponibiliteMedecin = await Disponibility.find({
       medecinid: medecinidtofind,
     });
-    // .populate("medecin");
     res.status(200).send({
       msg: "disponibilité pour ce medecin est :",
       disponibiliteMedecin,
@@ -56,9 +55,13 @@ exports.updateDisponibility = async (req, res) => {
       { $set: { ...dispoUpdated } }
     );
     const disponibility = await Disponibility.find({ medecinid: medecinid });
-    res.status(200).send({ msg: "disponibilité modifié", disponibility });
+    return res
+      .status(200)
+      .send({ msg: "disponibilité modifié", disponibility });
   } catch (error) {
-    res.status(400).send({ msg: "erreur lors de la modification ", error });
+    return res
+      .status(400)
+      .send({ msg: "erreur lors de la modification ", error });
   }
 };
 
@@ -92,9 +95,11 @@ exports.updateDisponibilityDay = async (req, res) => {
       }
     );
     const disponibility = await Disponibility.find({ medecinid: medecinid });
-    res.status(200).send({ msg: "disponibilité modifiée", disponibility });
+    return res
+      .status(200)
+      .send({ msg: "disponibilité modifiée", disponibility });
   } catch (error) {
-    res
+    return res
       .status(400)
       .send({ msg: "Veuillez corriger les informations saisies", error });
   }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   USER_LOAD,
   REGISTER_SUCCESS,
@@ -12,32 +13,27 @@ import {
   UPDATE_USER_FAIL,
 } from "../ActionType/user";
 
-export const RegisterUser = (newUser, history) => async (dispatch) => {
+export const RegisterUser = (newUser, navigate) => async (dispatch) => {
   dispatch({ type: USER_LOAD });
   try {
     const result = await axios.post("/api/user/Register", newUser);
-    dispatch({ type: REGISTER_SUCCESS, payload: result.data }); //msg.newuser.token
-    // const profile_id = result.data.newuser._id;
     localStorage.setItem("token", result.data.token);
-    history.push("/");
+    navigate("/");
+    return dispatch({ type: REGISTER_SUCCESS, payload: result.data }); //msg.newuser.token
   } catch (error) {
-    dispatch({ type: USER_FAIL, payload: error.response.data });
+    dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 
-export const LoginUser = (User, history) => async (dispatch) => {
+export const LoginUser = (User, navigate) => async (dispatch) => {
   dispatch({ type: USER_LOAD });
   try {
     const result = await axios.post("/api/user/Login", User);
-    dispatch({ type: LOGIN_SUCCESS, payload: result.data });
-    const profile_id = result.data.userToFind._id;
-
     localStorage.setItem("token", result.data.token);
-    // localStorage.setItem("role", result.data.userToFind.role);
-    console.log(result.data.userToFind.role);
-    history.push(`/Profil/${profile_id}/Rdv`);
+    navigate(`/Profil/Rdv`);
+    return dispatch({ type: LOGIN_SUCCESS, payload: result.data });
   } catch (error) {
-    dispatch({ type: USER_FAIL, payload: error.response.data });
+    return dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 
@@ -48,9 +44,9 @@ export const Current = () => async (dispatch) => {
       headers: { authorization: localStorage.getItem("token") },
     };
     const result = await axios.get("/api/user/Current", config);
-    dispatch({ type: CURRENT_USER, payload: result.data });
+    return dispatch({ type: CURRENT_USER, payload: result.data });
   } catch (error) {
-    // dispatch({ type: USER_FAIL, payload: error.response.data });
+    dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 
@@ -65,18 +61,20 @@ export const Logout = () => {
 export const PrendreRdv = (medecinid) => async (dispatch) => {
   try {
     const result = await axios.get(`/api/medecin/onedoctor/${medecinid}`);
-    dispatch({ type: PRENDRE_RDV, payload: result.data.doctorfound });
+    return dispatch({ type: PRENDRE_RDV, payload: result.data.doctorfound });
   } catch (error) {
-    dispatch({ type: PRENDRE_RDV_FAIL, payload: error.response.data });
+    return dispatch({ type: PRENDRE_RDV_FAIL, payload: error.response.data });
   }
 };
 
 export const UpdateUser = (userid, userupdated) => async (dispatch) => {
   try {
+    // const token = {
+    //   Headers: { authorization: Window.localStorage.getItem("token") },
+    // };
     await axios.put(`/api/user/updateuser/${userid}`, userupdated);
-    console.log(userupdated);
-    dispatch({ type: UPDATE_USER_SUCCESS });
+    return dispatch({ type: UPDATE_USER_SUCCESS });
   } catch (error) {
-    dispatch({ type: UPDATE_USER_FAIL, payload: error.response.data });
+    return dispatch({ type: UPDATE_USER_FAIL, payload: error.response.data });
   }
 };

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginMed } from "../../JS/Actions/medecin";
-
+import { useNavigate } from "react-router-dom";
 import "./LoginMedecin.css";
 
 const LoginMedecin = ({ history, setDoctorlogged }) => {
+  const navigate = useNavigate();
   const [Medecin, setMedecin] = useState({
     email: "",
     password: "",
@@ -16,6 +17,12 @@ const LoginMedecin = ({ history, setDoctorlogged }) => {
     setMedecin({ ...Medecin, [e.target.name]: e.target.value });
   };
   const dispatch = useDispatch();
+  const onEnter = (e) => {
+    if (e.keyCode === 13) {
+      setDoctorlogged(true);
+      dispatch(LoginMed(Medecin, navigate));
+    }
+  };
 
   return (
     <div>
@@ -70,6 +77,7 @@ const LoginMedecin = ({ history, setDoctorlogged }) => {
                         value={Medecin.password}
                         onChange={HandleChange}
                         placeholder="***********"
+                        onKeyDown={(e) => onEnter(e)}
                       />
                     </div>
                     <input
@@ -80,7 +88,7 @@ const LoginMedecin = ({ history, setDoctorlogged }) => {
                       defaultValue="Connexion"
                       onClick={() => {
                         setDoctorlogged(true);
-                        dispatch(LoginMed(Medecin, history));
+                        dispatch(LoginMed(Medecin, navigate));
                       }}
                     />
                   </form>

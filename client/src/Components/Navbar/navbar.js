@@ -43,8 +43,8 @@ const NavBar = () => {
 
               {UserIsAuth ? (
                 <>
-                  <Link to={`/Profil/${user._id}`}>
-                    <Nav.Link href="#home">Bienvenue {user.nom} </Nav.Link>
+                  <Link to={`/Profil/`}>
+                    <Nav.Link href="#home">Bienvenue {user.lastName} </Nav.Link>
                   </Link>
                   <Link to={"/"}>
                     <Button
@@ -57,7 +57,7 @@ const NavBar = () => {
                 </>
               ) : medecinIsAuth ? (
                 <>
-                  <Link to={`/Dr/${medecin._id}/Rendez-vous`}>
+                  <Link to={`/Dr/${medecin._id}/Accueil`}>
                     <Nav.Link href="#home">
                       Bienvenue Dr {medecin.lastname}{" "}
                     </Nav.Link>

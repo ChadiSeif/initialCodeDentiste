@@ -1,41 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { GetRdvUser } from "../../JS/Actions/Rdv";
-
+import { Current } from "../../JS/Actions/user";
 import ProfileRdv from "../../Components/PatientProfile/ProfileRdv";
 import Demandes from "../../Components/PatientProfile/Demandes";
 import ProfilInformations from "../../Components/PatientProfile/ProfilInformations";
 import DossierMedical from "../../Components/PatientProfile/DossierMedical";
+import SideBar from "../../Components/PatientProfile/SideBar";
 
-import SideBar from "./SideBar";
 import "./profil.css";
 
 const Profil = ({ location }) => {
-  ////************Set USER state */
+  ////**Set USER state */
 
   const [user, setuser] = useState({
-    prenom: "",
-    nom: "",
-    numero: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
     email: "",
-    dateDeNaissance: "",
-    motdepass: "",
+    dateOfBirth: "",
+    password: "",
   });
 
-  ////************Get USER and Rdv reducers from Store */
-  const userRed = useSelector((state) => state.userReducer.user);
+  //**Get USER and Rdv reducers from Store */
   const dispatch = useDispatch();
 
-  //***************Get user Id */
-  const userid = location.pathname.substring(8, 32);
+  //**Get user Id */
+  // const userid = location.pathname.substring(8, 32);
+  // const userid = jwt.decode(localStorage.getItem("authorization"));
+
+  useEffect(() => {
+    Current();
+    // eslint-disable-next-line
+  }, []);
+
+  const userRed = useSelector((state) => state.userReducer.user);
+  const userid = userRed._id;
 
   useEffect(() => {
     setuser(userRed);
     dispatch(GetRdvUser(userid));
-    // eslint-disable-next-line
-  }, [userRed, userid]);
+  }, [userRed, userid, dispatch]);
 
   return (
     <div className="profile">
@@ -43,12 +50,12 @@ const Profil = ({ location }) => {
         <SideBar user={user} />
       </div>
       <div className="profileContainer">
-        <Switch>
-          <Route exact path="/Profil/:id/" component={ProfileRdv} />
-          <Route exact path="/Profil/:id/Rdv" component={ProfileRdv} />
+        <Routes>
+          <Route exact path="/Profil/" component={ProfileRdv} />
+          <Route exact path="/Profil/Rdv" component={ProfileRdv} />
           <Route
             exact
-            path="/Profil/:id/informations"
+            path="/Profil/informations"
             render={(props) => (
               <ProfilInformations
                 user={user}
@@ -63,7 +70,7 @@ const Profil = ({ location }) => {
             component={DossierMedical}
           />
           <Route exact path="/Profil/:id/Demande" component={Demandes} />
-        </Switch>
+        </Routes>
       </div>
     </div>
   );

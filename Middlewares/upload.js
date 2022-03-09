@@ -22,7 +22,7 @@ var upload = multer({
     ) {
       callback(null, true);
     } else {
-      console.log("only images are allowed");
+      alert("only images are allowed");
       callback(null, false);
     }
   },

@@ -15,7 +15,6 @@ router.use(express.json());
 //@data : req.body
 
 router.post("/Add", [upload.single("image")], validation, Add);
-// validRdv(),
 
 //@desc : get Rdv of users
 //@method: GET

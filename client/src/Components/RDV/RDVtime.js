@@ -12,8 +12,6 @@ const RDVtime = ({
   setStartTime,
   HoursInDay,
 }) => {
-  // console.log(Day);
-
   //** setting time interval */
   const interval = disponibilityReducer.interval;
   const intervalInSec = interval * 60;
@@ -23,11 +21,6 @@ const RDVtime = ({
     const splitValue = a.split(":");
     return parseInt(splitValue[0]) * 60 * 60 + parseInt(splitValue[1]) * 60;
   };
-  //** Current Hour */
-  // var date = new Date();
-  // const hours = date.getHours();
-  // const minutes = date.getMinutes();
-  // const TimeNow = `${hours}:${minutes}`;
 
   //**Creating array of Time */
   const locale = "fr";
@@ -59,19 +52,6 @@ const RDVtime = ({
               >
                 {hour}
               </button>
-              {/* <Button
-                variant="outline-dark"
-                value={hour}
-                aria-pressed="true"
-                auto-complete="off"
-                onClick={(e) => {
-                  setStartTime(e.target.value);
-                  setRdv({ ...Rdv, hour: e.target.value });
-                }}
-                style={{ margin: "10px" }}
-              >
-                {hour}
-              </Button> */}
             </li>
           )
         )}

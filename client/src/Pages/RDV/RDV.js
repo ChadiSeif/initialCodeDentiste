@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router";
+import { useNavigate } from "react-router";
 import { Calendar } from "react-calendar";
 import { Button, Card } from "react-bootstrap";
-
 import { Current, PrendreRdv } from "../../JS/Actions/user";
 import { getDisponibility } from "../../JS/Actions/disponibility";
 import { addRdv, GetRdvMedecin } from "../../JS/Actions/Rdv";
 
 import SimpleMap from "../../Components/GoogleMaps/GoogleMapReact";
 import RDVtime from "../../Components/RDV/RDVtime";
-
 import moment from "moment";
 import "moment/locale/fr";
 import "./RDV.css";
 
-const RDV = ({ location, history }) => {
+const RDV = ({ history }) => {
   let token = localStorage.getItem("token");
+  let navigate = useNavigate();
 
   //**Get informations from Store */
-  const medecinid = location.pathname.substring(5);
+  const medecinid = localStorage.getItem("medecinID");
   const medecinRDV = useSelector((state) => state.userReducer.medecinRDV);
   const userId = useSelector((state) => state.userReducer.user._id);
   const userReducer = useSelector((state) => state.userReducer.user);
@@ -44,9 +43,8 @@ const RDV = ({ location, history }) => {
     // eslint-disable-next-line
   }, [dispatch, userId]);
 
-  //** picking Date from calendar */
+  //picking Date from calendar */
   const [value, onChangeValue] = useState(new Date());
-  console.log(value.getDate());
   const valueformString = value.toLocaleDateString("fr-FR");
   const datepicked = String(value).substring(0, 15);
   const daypicked = String(value).substring(0, 3);
@@ -57,22 +55,21 @@ const RDV = ({ location, history }) => {
   const EndtimeFormatDate = moment(StartingTime, format).add(30, "m").toDate();
   const EndingTime = String(EndtimeFormatDate).substring(16, 21);
 
-  // RDV
+  //RDV
   const [Rdv, setRdv] = useState({
     date: "",
     hour: "",
     hourfinishing: "",
     StartTime: "",
     EndTime: "",
-    Subject: userReducer.nom + " " + userReducer.prenom,
+    Subject: userReducer.lastName + " " + userReducer.firstName,
     user: userId,
     medecin: medecinid,
     Consulting: "",
     image: "",
   });
-  console.log(Rdv);
 
-  //Function upload image
+  //Upload image
   const onChangeFile = (e) => {
     setRdv({ ...Rdv, image: e.target.files[0] });
   };
@@ -100,14 +97,14 @@ const RDV = ({ location, history }) => {
   // **Redirect after Confirming */
   const redirectfunction = () => {
     setTimeout(function () {
-      history.push(`/Profil/${Rdv.user}/Rdv`);
+      history.push(`/Profil/Rdv`);
     }, 2000);
   };
 
   return (
     <div className="RDVmedecincontainer">
       {token === null ? (
-        <Redirect to="/CheckRdv" />
+        navigate("/CheckRdv")
       ) : (
         <div className="RDVmedecin">
           <div className="RDVprofile">

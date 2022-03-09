@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Medecin from "../../Components/Medecin/Medecin";
+import MedecinListIndexPage from "../../Components/Medecin/MedecinListIndexPage";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
@@ -46,20 +46,14 @@ const Index = () => {
             setActive(true);
           }}
         ></input>
-        <Link to="/Medecins">
+        <Link to="/liste-des-medecins">
           <button className="Button">Rechercher</button>
         </Link>
       </div>
-      {/* <div className="Specialite">
-        <h3>Les specialités en medecine dentaire</h3>
-        <div>
-          <Caroussel />
-        </div>
-      </div> */}
 
       {active ? (
         <div className="listmedecin">
-          <Medecin name={name} city={city} />
+          <MedecinListIndexPage name={name} city={city} />
         </div>
       ) : null}
 
@@ -72,7 +66,7 @@ const Index = () => {
               src="/assets/247.svg"
               alt="24himage"
             />
-            <p>Prenez rendez vous en ligne, 24h/24 et 7j/7</p>
+            <p>Prener rendez vous en ligne, 24h/24 et 7j/7</p>
           </div>
           <div>
             <img
@@ -80,7 +74,7 @@ const Index = () => {
               src="/assets/historique.svg"
               alt="24himage"
             />
-            <p>Retrouvez votre historique de rendez-vous</p>
+            <p>Retrouver votre historique de rendez-vous</p>
           </div>
           <div>
             <img
@@ -88,7 +82,7 @@ const Index = () => {
               src="/assets/contract.svg"
               alt="24himage"
             />
-            <p>Accedez à vos documents médicaux</p>
+            <p>Acceder à vos documents médicaux</p>
           </div>
           <div>
             <img
@@ -97,7 +91,7 @@ const Index = () => {
               alt="24himage"
             />
             <p>
-              voir instantanément toutes les disponibilités de votre docteur
+              Voir instantanément toutes les disponibilités de votre docteur
             </p>
           </div>
         </div>
@@ -107,7 +101,7 @@ const Index = () => {
       </div> */}
       <div className="medecinlandpageinformations">
         <div>
-          <h3> Vous êtes un médecin dentiste ?</h3>
+          <h3> Vous êtes médecin dentiste ?</h3>
           <ul>
             <li>Réduisez l'absentéisme de vos patients</li>
             <li>Simplifiez la vie de vos patients</li>

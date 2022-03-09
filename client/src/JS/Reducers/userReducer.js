@@ -36,7 +36,7 @@ const userReducer = (state = initstate, { type, payload }) => {
     case LOGOUT:
       return { ...state, user: payload, load: false, UserIsAuth: false };
     case USER_FAIL:
-      return { ...state, error: payload.errors };
+      return { ...state, error: payload.data.errors };
     case PRENDRE_RDV:
       return { ...state, medecinRDV: payload, error: payload.errors };
     case PRENDRE_RDV_FAIL:

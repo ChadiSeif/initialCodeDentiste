@@ -41,7 +41,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20%;
+  margin-left: 25% !important;
+  /* margin-left: 30%; */
 }
 .login-card .form-control {
   border: 1px solid #d5dae2;
@@ -73,7 +74,7 @@ body {
 .login-card .forgot-password-link {
   font-size: 14px;
   color: #919aa3;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 .login-card-footer-text {
   font-size: 16px;

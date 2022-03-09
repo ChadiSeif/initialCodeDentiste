@@ -55,7 +55,7 @@ const Listepatients = () => {
         {name
           ? patientUniqueByKey
               .filter((patient, i) =>
-                patient.nom.toLowerCase().includes(name.toLowerCase())
+                patient.firstName.toLowerCase().includes(name.toLowerCase())
               )
               .map((patient, i) => (
                 <div key={i}>
@@ -64,7 +64,7 @@ const Listepatients = () => {
               ))
           : DOB
           ? patientUniqueByKey
-              .filter((patient, i) => patient.dateDeNaissance.includes(DOB))
+              .filter((patient, i) => patient.dateOfBirth.includes(DOB))
               .map((patient, i) => (
                 <div key={i}>
                   <ListepatientCard patient={patient} />
@@ -74,8 +74,8 @@ const Listepatients = () => {
           ? patientUniqueByKey
               .filter(
                 (patient, i) =>
-                  patient.nom.toLowerCase().includes(name) &&
-                  patient.dateDeNaissance.includes(DOB)
+                  patient.firstName.toLowerCase().includes(name) &&
+                  patient.dateOfBirth.includes(DOB)
               )
               .map((patient, i) => (
                 <div key={i}>

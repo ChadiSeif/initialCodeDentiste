@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MedecinCardList from "../../Components/Medecin/MedecinCardList";
+import MedecinCardList from "./MedecinCardList";
 import { GET_medecin } from "../../JS/Actions/medecin";
 
 import "./listMedecin.css";

@@ -1,37 +1,38 @@
 import React from "react";
-// import { loadCldr } from "@syncfusion/ej2-base";
-// import {
-//   Inject,
-//   ScheduleComponent,
-//   Day,
-//   Week,
-//   WorkWeek,
-//   Month,
-//   Agenda,
-//   // EventSettingsModel,
-// } from "@syncfusion/ej2-react-schedule";
+import { useSelector } from "react-redux";
+import { loadCldr } from "@syncfusion/ej2-base";
+import {
+  Inject,
+  ScheduleComponent,
+  Day,
+  Week,
+  WorkWeek,
+  Month,
+  Agenda,
+  // EventSettingsModel,
+} from "@syncfusion/ej2-react-schedule";
 import "./Schedular.css";
 
-const Schedular = ({ RdvMedecin }) => {
-  // loadCldr(
-  //   require("cldr/supplemental/numberingSystems.json"),
-  //   require("cldr/main/fr/ca-gregorian.json"),
-  //   require("cldr/main/fr/numbers.json"),
-  //   require("cldr/main/fr/timeZoneNames.json")
-  // );
+const Schedular = () => {
+  loadCldr(
+    require("cldr/supplemental/numberingSystems.json"),
+    require("cldr/main/fr/ca-gregorian.json"),
+    require("cldr/main/fr/numbers.json"),
+    require("cldr/main/fr/timeZoneNames.json")
+  );
+  const RdvMedecin = useSelector((state) => state.RdvReducer.RdvMedecin);
+  const EventSettingsModel = {
+    dataSource: RdvMedecin,
+  };
 
-  // const EventSettingsModel = {
-  //   dataSource: RdvMedecin,
-  // };
-
-  // const onPopupOpen = (args) => {
-  //   args.element.innerHTML = "";
-  // };
-  ///////////////////////
+  const onPopupOpen = (args) => {
+    args.element.innerHTML = "";
+  };
+  /////////////////////
 
   return (
     <div className="schedular">
-      {/* <div
+      <div
         className="scheduleComponent"
         style={{
           width: "90%",
@@ -50,8 +51,7 @@ const Schedular = ({ RdvMedecin }) => {
         >
           <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
         </ScheduleComponent>
-      </div> */}
-      <h4>hello !</h4>
+      </div>
     </div>
   );
 };
