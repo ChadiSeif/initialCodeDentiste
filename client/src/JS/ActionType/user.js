@@ -4,6 +4,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const USER_FAIL = "USER_FAIL";
 
 export const CURRENT_USER = "CURRENT_USER";
+export const CURRENT_USER_FAIL = "CURRENT_USER_FAIL";
 export const LOGOUT = "LOGOUT";
 
 export const PRENDRE_RDV = "PRENDRE_RDV";

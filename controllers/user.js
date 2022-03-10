@@ -97,9 +97,9 @@ exports.updateUser = userid = async (req, res) => {
   try {
     const userid = req.params.id;
     const userupdated = req.body;
-    // const salt = 10;
-    // const hashedpassword = bcrypt.hash(userupdated.password, salt);
-    // userupdated.password = hashedpassword;
+    const salt = 10;
+    const hashedpassword = bcrypt.hash(userupdated.password, salt);
+    userupdated.password = hashedpassword;
     const result = await User.updateOne(
       { _id: userid },
       { $set: { ...userupdated } }

@@ -13,7 +13,8 @@ import {
 const initstate = {
   user: {},
   load: false,
-  error: [],
+  error: null,
+  currentError: [],
   UserIsAuth: false,
   medecinRDV: {},
 };
@@ -21,7 +22,7 @@ const initstate = {
 const userReducer = (state = initstate, { type, payload }) => {
   switch (type) {
     case USER_LOAD:
-      return { ...state, load: true, error: [] };
+      return { ...state, load: true };
     case REGISTER_SUCCESS:
       return { ...state, user: payload.newuser, load: false, UserIsAuth: true };
     case LOGIN_SUCCESS:

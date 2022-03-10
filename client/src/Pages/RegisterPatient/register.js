@@ -44,9 +44,28 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const error = useSelector((state) => state.userReducer.error);
-
+  console.log("error  is ", error);
   const HandleChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
+  };
+
+  const handleError = (param) => {
+    return (
+      <div>
+        {" "}
+        {error ? (
+          <form style={{ color: "red", fontSize: "0.75rem" }}>
+            <p>
+              {error
+                .filter((error) => error.param === param)
+                .map((error) => (
+                  <p>{error.msg}</p>
+                ))}
+            </p>
+          </form>
+        ) : null}
+      </div>
+    );
   };
 
   return (
@@ -57,26 +76,6 @@ const Register = () => {
       </div>
 
       <div className="formulaire">
-        <div className="msg">
-          {error ? (
-            <form style={{ color: "red", fontSize: "12px" }}>
-              <p>
-                {" "}
-                {error.map((error) => (
-                  <p>{error.msg}</p>
-                ))}
-              </p>
-              <hr />
-            </form>
-          ) : null}
-          {/* <Link to="/Login">
-            <Button variant="light" style={{ width: "50%" }}>
-              Dejà inscrit ?
-            </Button>
-          </Link>
-          <hr /> */}
-        </div>
-
         <form>
           <input
             type="text"
@@ -84,10 +83,10 @@ const Register = () => {
             value={newUser.lastName}
             onChange={HandleChange}
             placeholder="Nom"
-            style={{
-              borderColor: newUser.lastName === "" && error ? "red" : null,
-            }}
+            style={error ? { borderColor: "red" } : null}
           />
+
+          {handleError("lastName")}
         </form>
 
         <form>
@@ -101,6 +100,7 @@ const Register = () => {
               borderColor: newUser.firstName === "" && error ? "red" : null,
             }}
           />
+          {handleError("firstName")}
         </form>
         <form>
           <input
@@ -113,6 +113,7 @@ const Register = () => {
               borderColor: newUser.phone === "" && error ? "red" : null,
             }}
           />
+          {handleError("phone")}
         </form>
         <form>
           <input
@@ -125,6 +126,7 @@ const Register = () => {
               borderColor: newUser.dateOfBirth === "" && error ? "red" : null,
             }}
           />
+          {handleError("dateOfBirth")}
         </form>
         <div></div>
         <form>
@@ -138,6 +140,7 @@ const Register = () => {
               borderColor: newUser.email === "" && error ? "red" : null,
             }}
           />
+          {handleError("email")}
         </form>
 
         <form>
@@ -151,6 +154,7 @@ const Register = () => {
               borderColor: newUser.password === "" && error ? "red" : null,
             }}
           />
+          {handleError("password")}
 
           <hr />
         </form>
@@ -170,17 +174,6 @@ const Register = () => {
           >
             S'inscrire
           </button>
-          {/* <button
-            onClick={() =>
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              })
-            }
-          >
-            {" "}
-            go up
-          </button> */}
         </form>
       </div>
       <div></div>

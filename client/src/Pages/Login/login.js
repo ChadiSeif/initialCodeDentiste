@@ -98,7 +98,7 @@ const Login = ({ history }) => {
                   <p className="login-card-footer-text">
                     Vous n'avez pas encore de compte ?{" "}
                     <a
-                      href="/CheckRdv"
+                      href="/Register"
                       className="text-reset"
                       style={{ marginTop: "10px" }}
                     >

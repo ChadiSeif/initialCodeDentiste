@@ -6,6 +6,7 @@ import {
   USER_FAIL,
   LOGIN_SUCCESS,
   CURRENT_USER,
+  CURRENT_USER_FAIL,
   LOGOUT,
   PRENDRE_RDV,
   PRENDRE_RDV_FAIL,
@@ -21,7 +22,7 @@ export const RegisterUser = (newUser, navigate) => async (dispatch) => {
     navigate("/");
     return dispatch({ type: REGISTER_SUCCESS, payload: result.data }); //msg.newuser.token
   } catch (error) {
-    // dispatch({ type: USER_FAIL, payload: error.response });
+    return dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 
@@ -33,7 +34,7 @@ export const LoginUser = (User, navigate) => async (dispatch) => {
     navigate(`/Profil/Rdv`);
     return dispatch({ type: LOGIN_SUCCESS, payload: result.data });
   } catch (error) {
-    // return dispatch({ type: USER_FAIL, payload: error.response });
+    return dispatch({ type: USER_FAIL, payload: error.response });
   }
 };
 
@@ -46,7 +47,7 @@ export const Current = () => async (dispatch) => {
     const result = await axios.get("/api/user/Current", config);
     return dispatch({ type: CURRENT_USER, payload: result.data });
   } catch (error) {
-    dispatch({ type: USER_FAIL, payload: error.response });
+    dispatch({ type: CURRENT_USER_FAIL, payload: error.response });
   }
 };
 
